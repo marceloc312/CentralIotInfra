@@ -10,7 +10,7 @@ services:
       - default
     ports:
       - target: 8080
-        published: 8084
+        published: 8089
         protocol: tcp
         mode: host
 
