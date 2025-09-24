@@ -4,8 +4,6 @@ services:
   krakend:
     image: devopsfaith/krakend:2.7
     command: ["run", "-c", "/etc/krakend/krakend.json"]
-    volumes:
-      - ./krakend.json:/etc/krakend/krakend.json:ro
     networks:
       - default
     ports:
@@ -13,8 +11,17 @@ services:
         published: 8089
         protocol: tcp
         mode: host
+    configs:
+      - source: krakend_json
+        target: /etc/krakend/krakend.json
+        mode: 0444
 
 networks:
   default:
     external: true
     name: overlay-swarm
+
+configs:
+  krakend_json:
+    external: true
+    name: krakend.json
